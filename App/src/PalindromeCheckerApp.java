@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
@@ -8,18 +7,25 @@ public class PalindromeCheckerApp {
          * This is a Palindrome Checker App Welcome Message
          *
          * @author Developer
-         * @version 3.0
+         * @version 4s.0
         */
-        String input = "madam";
-        String reversed = "";
-        boolean isPalindrome = false;
-        System.out.println("Input text: " + input);
-        for (int i = input.length() - 1; i >= 0 ; i--) {
-            reversed = reversed + input.charAt(i);
+        String input = "radar";
+        char[] chars = input.toCharArray();
+        int start = 0;
+        int end = chars.length - 1;
+        boolean isPalindrome = true;
+        System.out.println("Input : " + input);
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
         }
-        if (input.equals(reversed)){
-            isPalindrome = true;
-        }
+
         System.out.println("Is it Palindrome? : "+ isPalindrome);
     }
 }
