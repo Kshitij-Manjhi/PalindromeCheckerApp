@@ -2,12 +2,12 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         /**
-         * Application entry point for UC9
+         * Application entry point for UC10
          *
-         * This is a Palindrome Checker App Recursive
+         * This is a Palindrome Checker App Case-Insensitive & Space-Ignored
          *
          * @author Developer
-         * @version 9.0
+         * @version 10.0
         */
 
         String input = "A man a plan a canal Panama";
