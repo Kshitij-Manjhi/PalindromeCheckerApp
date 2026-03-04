@@ -2,28 +2,39 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         /**
-         * Application entry point for UC10
+         * Application entry point for UC11
          *
          * This is a Palindrome Checker App Case-Insensitive & Space-Ignored
          *
          * @author Developer
-         * @version 10.0
+         * @version 11.0
         */
 
-        String input = "A man a plan a canal Panama";
+        String input = "racecar";
 
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        PalindromeService service = new PalindromeService();
+        boolean isPalindrome = service.checkPalindrome(input);
 
-        boolean isPalindrome = true;
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+}
 
-        for (int i = 0; i < normalized.length() / 2; i++) {
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
             }
+            start++;
+            end--;
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        return true;
     }
 }
