@@ -2,44 +2,36 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         /**
-         * Application entry point for UC12
+         * Application entry point for UC13
          *
-         * This is a Palindrome Checker App Strategy Pattern
+         * This is a Palindrome Checker App Performance Comparison
          *
          * @author Developer
-         * @version 12.0
+         * @version 13.0
         */
 
         String input = "level";
+        String normalized = input.toLowerCase();
 
-        PalindromeStrategy strategy = new StackStrategy();
-        boolean isPalindrome = strategy.check(input);
+        long startTime = System.nanoTime();
 
-        System.out.println("Input: " + input);
-        System.out.println("Is Palindrome?: " + isPalindrome);
-    }
-}
+        boolean isPalindrome = true;
+        int start = 0;
+        int end = normalized.length() - 1;
 
-interface PalindromeStrategy {
-    boolean check(String input);
-}
-
-class StackStrategy implements PalindromeStrategy {
-
-    public boolean check(String input) {
-
-        java.util.Stack<Character> stack = new java.util.Stack<>();
-
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
-                return false;
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                isPalindrome = false;
+                break;
             }
+            start++;
+            end--;
         }
 
-        return true;
+        long endTime = System.nanoTime();
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + (endTime - startTime) + " ns");
     }
 }
