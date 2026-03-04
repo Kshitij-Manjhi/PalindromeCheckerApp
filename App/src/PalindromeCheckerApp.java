@@ -2,37 +2,42 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         /**
-         * Application entry point for UC11
+         * Application entry point for UC12
          *
-         * This is a Palindrome Checker App Case-Insensitive & Space-Ignored
+         * This is a Palindrome Checker App Strategy Pattern
          *
          * @author Developer
-         * @version 11.0
+         * @version 12.0
         */
 
-        String input = "racecar";
+        String input = "level";
 
-        PalindromeService service = new PalindromeService();
-        boolean isPalindrome = service.checkPalindrome(input);
+        PalindromeStrategy strategy = new StackStrategy();
+        boolean isPalindrome = strategy.check(input);
 
         System.out.println("Input: " + input);
         System.out.println("Is Palindrome?: " + isPalindrome);
     }
 }
 
-class PalindromeService {
+interface PalindromeStrategy {
+    boolean check(String input);
+}
 
-    public boolean checkPalindrome(String input) {
+class StackStrategy implements PalindromeStrategy {
 
-        int start = 0;
-        int end = input.length() - 1;
+    public boolean check(String input) {
 
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 return false;
             }
-            start++;
-            end--;
         }
 
         return true;
