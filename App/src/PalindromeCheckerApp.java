@@ -2,30 +2,44 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         /**
-         * Application entry point for UC9
+         * Application entry point for UC12
          *
-         * This is a Palindrome Checker App Recursive
+         * This is a Palindrome Checker App Strategy Pattern
          *
          * @author Developer
-         * @version 9.0
+         * @version 12.0
         */
 
-        String input = "madam";
+        String input = "level";
 
-        boolean isPalindrome = check(input, 0, input.length() - 1);
+        PalindromeStrategy strategy = new StackStrategy();
+        boolean isPalindrome = strategy.check(input);
 
-        System.out.println("Input : " + input);
-        System.out.println("Is it Palindrome? : " + isPalindrome);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
     }
+}
 
-    private static boolean check(String s, int start, int end) {
+interface PalindromeStrategy {
+    boolean check(String input);
+}
 
-        if (start >= end)
-            return true;
+class StackStrategy implements PalindromeStrategy {
 
-        if (s.charAt(start) != s.charAt(end))
-            return false;
+    public boolean check(String input) {
 
-        return check(s, start + 1, end - 1);
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
